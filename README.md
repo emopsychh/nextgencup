@@ -34,9 +34,9 @@ cd nextgencup
 ```
 
 ## 🧑‍💻 Команда
-- Telegram-бот: @ваш_ник
-- Веб: React разработчик
-- Backend: Python разработчик
+- Telegram-бот: @emopsych, @Lexa_Arbuz
+- Веб: @aaseewaa, @SergWz54
+- Backend: @emopsych, @necroAnkh13
 
 ## 📄 Лицензия
 MIT License
