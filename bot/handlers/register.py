@@ -3,10 +3,9 @@ from aiogram.types import Message
 from bot.database.database import async_session
 from bot.database.operations import get_or_create_user
 from bot.keyboards.start_kb import get_start_keyboard
-from aiogram.fsm.context import FSMContext
-from bot.states.steam import SteamBinding
 from aiogram.types import CallbackQuery
 from bot.database.operations import update_steam_id
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 router = Router()
 
@@ -23,19 +22,18 @@ async def start_handler(message: Message):
     reply_markup=get_start_keyboard()
 )
     
+
 @router.callback_query(F.data == "bind_steam")
-async def ask_for_steam_id(callback: CallbackQuery, state: FSMContext):
-    await callback.message.answer("🔗 Пожалуйста, отправь свой Steam ID или ссылку на профиль:")
-    await state.set_state(SteamBinding.waiting_for_steam_id)
+async def send_steam_link(callback: CallbackQuery):
+    tg_id = callback.from_user.id
+    link = f"http://localhost:8000/auth/steam?tg_id={tg_id}"
+
+    await callback.message.answer(
+        f"🔗 Нажми на кнопку ниже, чтобы авторизоваться через Steam:",
+        reply_markup=InlineKeyboardMarkup(
+            inline_keyboard=[
+                [InlineKeyboardButton(text="Войти через Steam", url=link)]
+            ]
+        )
+    )
     await callback.answer()
-
-@router.message(SteamBinding.waiting_for_steam_id)
-async def receive_steam_id(message: Message, state: FSMContext):
-    steam_input = message.text
-    telegram_id = message.from_user.id
-
-    async with async_session() as session:
-        await update_steam_id(session, telegram_id, steam_input)
-
-    await message.answer(f"✅ Аккаунт успешно привязан: {steam_input}")
-    await state.clear()
