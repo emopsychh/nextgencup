@@ -19,3 +19,13 @@ async def get_or_create_user(session: AsyncSession, telegram_id: int, username: 
     if user:
         return user
     return await create_user(session, telegram_id, username)
+
+async def update_steam_id(session: AsyncSession, telegram_id: int, steam_id: str):
+    result = await session.execute(
+        select(User).where(User.telegram_id == telegram_id)
+    )
+    user = result.scalar_one_or_none()
+
+    if user:
+        user.steam_id = steam_id
+        await session.commit()
