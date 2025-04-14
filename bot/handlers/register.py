@@ -26,10 +26,12 @@ async def start_handler(message: Message):
 @router.callback_query(F.data == "bind_steam")
 async def send_steam_link(callback: CallbackQuery):
     tg_id = callback.from_user.id
-    link = f"http://localhost:8000/auth/steam?tg_id={tg_id}"
+
+    # 🔗 ВСТАВЬ сюда свою реальную ссылку с Render
+    link = f"https://твоё-название.onrender.com/auth/steam?tg_id={tg_id}"
 
     await callback.message.answer(
-        f"🔗 Нажми на кнопку ниже, чтобы авторизоваться через Steam:",
+        "🔗 Нажми на кнопку ниже, чтобы авторизоваться через Steam:",
         reply_markup=InlineKeyboardMarkup(
             inline_keyboard=[
                 [InlineKeyboardButton(text="Войти через Steam", url=link)]
