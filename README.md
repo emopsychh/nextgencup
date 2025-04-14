@@ -25,6 +25,7 @@ nextgencup/
 - Python (Aiogram, FastAPI/Flask)
 - React / Next.js
 - PostgreSQL / SQLite
+- https://www.figma.com/board/aQ2wJjgAqv5F4tHpTRYiTr/Untitled?node-id=0-1&t=n0QZH3CfRSOWJjeo-1
 
 ## 🧪 Установка
 ```bash
