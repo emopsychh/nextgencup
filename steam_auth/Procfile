@@ -1,0 +1,4 @@
+fastapi
+uvicorn[standard]
+python3-openid
+aiohttp
