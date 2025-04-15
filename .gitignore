@@ -1,0 +1,51 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environments
+venv/
+.env
+.env.*  # .env.dev, .env.prod и т.п.
+
+# Pytest cache
+.pytest_cache/
+
+# SQLite and PostgreSQL local files
+*.sqlite3
+*.db
+
+# VSCode and IDE configs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Alembic
+migrations/
+alembic/versions/
+
+# Jupyter / notebooks
+.ipynb_checkpoints
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Node.js (на всякий)
+node_modules/
+package-lock.json
+
+# SteamAuth deployment files (если будут временные)
+steam_auth/__pycache__/
+steam_auth/*.pyc
+steam_auth/*.log
