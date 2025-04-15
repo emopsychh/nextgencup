@@ -12,3 +12,10 @@ class User(Base):
     username = Column(String, nullable=True)
     steam_id = Column(String, nullable=True)  # на будущее
     created_at = Column(DateTime, default=datetime.utcnow)
+
+class SteamSession(Base):
+    __tablename__ = "steam_sessions"
+
+    session_id = Column(String, primary_key=True)
+    tg_id = Column(BigInteger, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
