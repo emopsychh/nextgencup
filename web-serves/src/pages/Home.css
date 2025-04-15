@@ -1,0 +1,45 @@
+/* src/pages/Home.css */
+.home-container {
+    color: #ffffff;
+    background-color: #121212; /* темный фон */
+    min-height: calc(100vh - 50px); /* с учётом нижней навигации */
+    padding: 16px;
+  }
+  
+  .home-header {
+    text-align: left;
+    margin-bottom: 24px;
+  }
+  
+  .home-header h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+  }
+  
+  .home-header p {
+    font-size: 16px;
+    margin: 0 0 16px;
+  }
+  
+  .primary-button {
+    background-color: #ffcc00;
+    color: #000;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  /* Блоки турниров */
+  .hot-tournaments-section,
+  .my-tournaments-section {
+    margin-bottom: 24px;
+  }
+  
+  .tournaments-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto; /* если хотим горизонтальную прокрутку или что-то подобное */
+  }
+  
