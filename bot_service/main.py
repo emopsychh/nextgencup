@@ -1,12 +1,11 @@
 from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
 from database.db import engine, Base
-from handlers import routers
+from handlers import routers, start, profile, tournaments, back
 
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
-
 for router in routers:
     dp.include_router(router)
 
