@@ -2,6 +2,7 @@ import os
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from bot.config import Config
 from bot.database.models import Base
+from bot.database.models import SteamSession
 
 # Создаём движок подключения к базе (URL берём из .env)
 engine = create_async_engine(Config.DB_URL, echo=False)
