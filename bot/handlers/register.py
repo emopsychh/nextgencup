@@ -28,7 +28,7 @@ async def send_steam_link(callback: CallbackQuery):
     tg_id = callback.from_user.id
 
     # 🔗 ВСТАВЬ сюда свою реальную ссылку с Render
-    link = f"https://nextgencup-steam.onrender.com/auth/steam?tg_id={tg_id}"
+    link = f"https://nextgencup-2.onrender.com/auth/steam?tg_id={tg_id}"
 
     await callback.message.answer(
         "🔗 Нажми на кнопку ниже, чтобы авторизоваться через Steam:",
