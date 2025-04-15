@@ -2,10 +2,15 @@ from aiogram import Router, types, F
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from sqlalchemy import select
 from datetime import datetime
-
 from database.db import AsyncSessionLocal
 from database.models import Tournament
 from keyboards.tournaments import tournaments_menu_keyboard, admin_tournaments_keyboard
+from aiogram.fsm.context import FSMContext
+from states.tournament_states import TournamentCreation
+from datetime import datetime
+from keyboards.main import main_menu_keyboard
+from services.challengermode_api import create_tournament
+from keyboards.tournaments import confirm_button
 
 router = Router()
 
@@ -36,7 +41,7 @@ async def show_tournament_list(message: types.Message):
             return
 
         keyboard = InlineKeyboardMarkup(
-            inline_keyboard=[
+            inline_keyboard=[ 
                 [InlineKeyboardButton(text=t.title, callback_data=f"tournament_{t.id}")]
                 for t in tournaments
             ]
@@ -74,21 +79,62 @@ async def show_tournament_details(callback: CallbackQuery):
         await callback.answer()
 
 
-# ➕ Создание турнира (только админ)
+# START FSM
 @router.message(F.text == "➕ Создать турнир")
-async def create_tournament(message: types.Message):
+async def start_tournament_creation(message: types.Message, state: FSMContext):
     if message.from_user.id != ADMIN_ID:
         await message.answer("⛔ У тебя нет прав для создания турниров.")
         return
 
-    async with AsyncSessionLocal() as session:
-        tournament = Tournament(
-            title="CS2 DUO CUP",
-            description="Командный турнир на вылет. Приз — слава и XP!",
-            date=datetime(2025, 4, 20, 18, 0),
-            chall_url="https://challengermode.com/tournaments/cs2-duocup-20apr"
-        )
-        session.add(tournament)
-        await session.commit()
+    await message.answer("📝 Введи <b>название</b> турнира:", parse_mode="HTML")
+    await state.set_state(TournamentCreation.title)
 
-        await message.answer(f"✅ Турнир «{tournament.title}» создан!")
+#NAME
+@router.message(TournamentCreation.title)
+async def set_title(message: types.Message, state: FSMContext):
+    await state.update_data(title=message.text)
+    await message.answer("✏️ Введи <b>описание</b> турнира:", parse_mode="HTML")
+    await state.set_state(TournamentCreation.description)
+
+#DESCRIPTION
+@router.message(TournamentCreation.description)
+async def set_description(message: types.Message, state: FSMContext):
+    await state.update_data(description=message.text)
+    await message.answer("📅 Введи <b>дату и время</b> турнира (пример: 20.04.2025 18:00):", parse_mode="HTML")
+    await state.set_state(TournamentCreation.date)
+
+#DATE AND TIME
+@router.message(TournamentCreation.date)
+async def set_date(message: types.Message, state: FSMContext):
+    # Получаем данные о турнире
+    date = message.text  # Дата, которую ввёл пользователь
+    await state.update_data(date=date)
+
+    # Переходим на следующий шаг — Подтверждение
+    await message.answer("✅ Подтвердите создание турнира:", reply_markup=confirm_button())
+    await state.set_state(TournamentCreation.confirm)
+
+
+@router.message(TournamentCreation.confirm)
+async def confirm_creation(message: types.Message, state: FSMContext):
+    if message.text != "✅ Подтвердить":
+        await message.answer("❌ Создание отменено.", reply_markup=main_menu_keyboard())
+        await state.clear()
+        return
+
+    data = await state.get_data()
+    title = data["title"]
+    description = data["description"]
+    start_time = data["date"]  # формат должен быть ISO 8601
+
+    try:
+        tournament_url = await create_tournament(title, description, start_time)
+        await message.answer(
+            f"✅ Турнир создан!\n\n🔗 <a href='{tournament_url}'>Смотреть на Challengermode</a>",
+            parse_mode="HTML",
+            reply_markup=main_menu_keyboard()
+        )
+    except Exception as e:
+        await message.answer(f"⚠️ Ошибка при создании турнира: {e}", reply_markup=main_menu_keyboard())
+
+    await state.clear()
