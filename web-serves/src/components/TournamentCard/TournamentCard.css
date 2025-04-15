@@ -1,0 +1,38 @@
+/* src/components/TournamentCard/TournamentCard.css */
+
+.tournament-card {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    padding: 16px;
+    min-width: 150px;
+    position: relative;
+    color: #fff;
+  }
+  
+  .tournament-info h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+  }
+  
+  .tournament-info p {
+    margin: 4px 0;
+    font-size: 14px;
+  }
+  
+  /* Пример отображения статусов */
+  .status-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    background-color: #ffcc00;
+    color: #000;
+  }
+  
+  .status-badge.open {
+    background-color: #1ce1a3;
+    color: #000;
+  }
+  

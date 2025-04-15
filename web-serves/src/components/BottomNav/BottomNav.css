@@ -1,0 +1,21 @@
+/* src/components/BottomNav/BottomNav.css */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #262626; /* темный фон, например */
+    padding: 8px 0;
+  }
+  
+  .nav-item {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    /* Доп. стили по желанию */
+  }
+  
+  .nav-item.active { 
+    /* стили для выбранного пункта меню, если нужно */
+    color: #ffcc00;
+  }
+  
