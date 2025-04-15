@@ -1,26 +1,72 @@
 // src/pages/Home.js
 import React from 'react';
 import TournamentCard from '../components/TournamentCard/TournamentCard';
-import './Home.css'; // стили конкретно для главной (если нужно)
+import MyTournamentCard from '../components/MyTournamentCard/MyTournamentCard';
+import './Home.css';
 
 function Home() {
-  // Здесь можно имитировать данные турниров, пока нет backend
+  // Пример данных турнира; в будущем они будут приходить из базы данных
   const hotTournaments = [
-    { id: 1, title: 'Counter-Strike 10 000₽', date: '20 Апреля', isOpen: true, mode: '5х5' },
-    { id: 2, title: 'Counter-Strike 5 000₽', date: '20 Апреля', isOpen: true, mode: '2х2' },
+    {
+      id: 1,
+      title: 'Counter-Strike',
+      gameName: 'Counter-Strike',
+      mode: '5х5',
+      prize: '10 000₽',
+      participants: 16,
+      status: 'Открытый',
+      date:"20 апреля"
+    },
+    {
+      id: 2,
+      title: 'Counter-Strike',
+      gameName: 'Counter-Strike',
+      mode: '1х1',
+      prize: '5 000₽',
+      participants: 2,
+      status: 'Закрытый',
+      date:"20 апреля"
+    },
   ];
 
   const myTournaments = [
-    { id: 3, title: 'Spring Cup Championship', date: '3 Марта', status: 'Победа', prize: '20 000₽' },
-    { id: 4, title: 'Spring Cup Championship', date: '14 Апреля', status: 'Победа', prize: '20 000₽' },
-    // ... и т.д.
+    {
+      id: 3,
+      title: 'Spring Cup Championship',
+      gameName: 'Counter-Strike',
+      mode: '5х5',
+      prize: '20 000₽',
+      participants: 10,
+      status: 'Открытый',
+      date:"20 апреля"
+    },
+    {
+      id: 4,
+      title: 'Autumn Cup',
+      gameName: 'Counter-Strike',
+      mode: '5х5',
+      prize: '15 000₽',
+      participants: 8,
+      status: 'Закрытый',
+      date:"20 апреля"
+    },
+    {
+      id: 5,
+      title: 'Autumn Cup',
+      gameName: 'Counter-Strike',
+      mode: '5х5',
+      prize: '15 000₽',
+      participants: 8,
+      status: 'Закрытый',
+      date:"20 апреля"
+    },
   ];
 
   return (
     <div className="home-container">
       <header className="home-header">
         <h1>Nextgen</h1>
-        <p>Играй. Побеждай. Зарабатывай.</p>
+        <p>Играй. Побеждай.<br /> Зарабатывай.</p>
         <button className="primary-button">Участвовать в турнире</button>
       </header>
 
@@ -35,9 +81,10 @@ function Home() {
 
       <section className="my-tournaments-section">
         <h2>Мои турниры</h2>
-        <div className="tournaments-grid">
+        {/* Контейнер для списка турниров */}
+        <div className="my-tournaments-list">
           {myTournaments.map(t => (
-            <TournamentCard key={t.id} tournament={t} />
+            <MyTournamentCard key={t.id} tournament={t} />
           ))}
         </div>
       </section>
@@ -46,4 +93,3 @@ function Home() {
 }
 
 export default Home;
-    
