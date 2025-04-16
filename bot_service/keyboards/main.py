@@ -14,6 +14,7 @@ def submenu_keyboard() -> ReplyKeyboardMarkup:
             [KeyboardButton(text="🧑‍💼 Профиль"), KeyboardButton(text="📊 Статистика")],
             [KeyboardButton(text="🏆 Турниры")],
             [KeyboardButton(text="ℹ️ О проекте")],
+            [KeyboardButton(text="⚙️ Настройки")],
         ],
         resize_keyboard=True
     )
