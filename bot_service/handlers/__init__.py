@@ -1,4 +1,3 @@
-from . import start, profile, tournaments
 from . import start, profile, tournaments, settings
 
 routers = [

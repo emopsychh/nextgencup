@@ -3,48 +3,47 @@ import aiohttp
 import time
 from dotenv import load_dotenv
 
-load_dotenv()
+# Загружаем переменные из .env
+load_dotenv(dotenv_path=".env")
 
 CLIENT_ID = os.getenv("CHALLENGERMODE_CLIENT_ID")
 REFRESH_KEY = os.getenv("CHALLENGERMODE_REFRESH_KEY")
-
 BASE_URL = "https://publicapi.challengermode.com/graphql"
+AUTH_URL = "https://auth.challengermode.com/v1/auth/access_keys"
 
+# Кэш для хранения токена
 _token_cache = {
     "access_token": None,
     "expires_at": 0
 }
 
-# Получаем access токен
+
 async def get_access_token():
     if _token_cache["access_token"] and _token_cache["expires_at"] > time.time():
         return _token_cache["access_token"]
 
     async with aiohttp.ClientSession() as session:
-        url = "https://auth.challengermode.com/connect/token"  # Новый URL для получения токена
-
         async with session.post(
-            url,
-            headers={"Content-Type": "application/x-www-form-urlencoded"},
-            data={
-                "grant_type": "client_credentials",
-                "client_id": CLIENT_ID,
-                "client_secret": REFRESH_KEY
+            AUTH_URL,
+            headers={"Content-Type": "application/json"},
+            json={
+                "refreshKey": REFRESH_KEY
             }
         ) as resp:
             if resp.status == 200:
                 data = await resp.json()
-                access_token = data["access_token"]
-                expires_in = data["expires_in"]
+                access_token = data["value"]
+                expires_at_str = data["expiresAt"]
+                expires_at_unix = time.mktime(time.strptime(expires_at_str.split(".")[0], "%Y-%m-%dT%H:%M:%S"))
 
                 _token_cache["access_token"] = access_token
-                _token_cache["expires_at"] = time.time() + expires_in - 10  # с запасом
-
+                _token_cache["expires_at"] = expires_at_unix - 10
                 return access_token
             else:
                 raise Exception(f"Ошибка получения токена: {resp.status} - {await resp.text()}")
 
-# Создаем турнир через GraphQL
+
+# Функция для создания турнира
 async def create_tournament(title: str, description: str, start_time: str):
     access_token = await get_access_token()
 
@@ -71,6 +70,7 @@ async def create_tournament(title: str, description: str, start_time: str):
         "startTime": start_time
     }
 
+    # Отправляем запрос на создание турнира
     async with aiohttp.ClientSession() as session:
         async with session.post(
             BASE_URL,
