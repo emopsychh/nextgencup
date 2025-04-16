@@ -1,36 +1,22 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-
-def tournaments_menu_keyboard(is_admin: bool = False):
-    buttons = [
-        [KeyboardButton(text="🗂 Список турниров")]
-    ]
-
-    if is_admin:
-        buttons.append([KeyboardButton(text="➕ Создать турнир")])
-
-    # Добавляем кнопку Назад
-    buttons.append([KeyboardButton(text="◀️ Назад")])
-
-    return ReplyKeyboardMarkup(
-        keyboard=buttons,
-        resize_keyboard=True,
-        input_field_placeholder="Выбери действие с турнирами"
-    )
-
-def admin_tournaments_keyboard():
-    return InlineKeyboardMarkup(
-        inline_keyboard=[
-            [InlineKeyboardButton(text="➕ Создать турнир", callback_data="create_tournament")]
-        ]
-    )
-
-def confirm_button():
+def tournaments_menu_keyboard():
+    from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="✅ Подтвердить")],
-            [KeyboardButton(text="❌ Отмена")]
+            [KeyboardButton(text="📄 Активные турниры")],
+            [KeyboardButton(text="➕ Создать турнир")],
+            [KeyboardButton(text="◀️ Назад")]
         ],
         resize_keyboard=True
     )
+
+def active_tournaments_inline_keyboard(tournaments: list) -> InlineKeyboardMarkup:
+    buttons = []
+    for t in tournaments:
+        date = t.date.strftime('%d.%m.%Y') if t.date else "без даты"
+        title = f"{t.title} — {date}"
+        url = t.chall_url or "https://challengermode.com"
+        buttons.append([InlineKeyboardButton(text=title, url=url)])
+
+    return InlineKeyboardMarkup(inline_keyboard=buttons)
