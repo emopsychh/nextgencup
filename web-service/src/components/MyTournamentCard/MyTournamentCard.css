@@ -1,0 +1,108 @@
+/* Контейнер карточки для "Моих турниров" */
+.my-tournament-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #1f1f1f;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  color: #fff;
+  width: 500px;   
+  height: 100px;  
+}
+
+/* Изображение (иконка) слева */
+.my-tournament-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+/* Контейнер для текстового содержимого */
+.my-tournament-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  text-align: left; 
+}
+
+/* Заголовок */
+.my-tournament-title {
+  font-size: 16px;
+  margin: 1px 0;
+  color: #fff;
+ /* отступ, если нужно сдвинуть текст вправо */
+}
+
+/* Приз */
+.my-tournament-prize {
+  font-size: 14px;
+  margin: 2px 0;
+  color: #ccc;
+}
+
+/* Нижняя часть: статус над датой */
+.my-tournament-footer {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  text-align: right;
+}
+
+.my-tournament-status {
+  display: block;
+  font-size: 13px;
+  color: #2EE59D;         /* Зеленый, можно изменить под макет */
+  margin-bottom: 30px; 
+}
+
+.my-tournament-date {
+  display: block;
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* Медиазапросы для мобильных устройств */
+@media (max-width: 480px) {
+  .my-tournament-card {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px;
+    width: 380px;   
+    height: 50px;  
+  }
+  .my-tournament-image {
+    width: 45px;
+    height: 45px;
+    margin-right: 8px;
+  }
+  .my-tournament-content {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 0px;
+  }
+  .my-tournament-title {
+    font-size: 13px;
+    margin-left: 0;
+  }
+  .my-tournament-prize {
+    font-size: 11px;
+  }
+  .my-tournament-footer { 
+    top: 5px;
+    right: 5px;
+  }
+  .my-tournament-status {
+    font-size: 15px;
+    margin-bottom:25px; 
+  }
+  .my-tournament-date {
+    font-size: 10px;
+  }
+}

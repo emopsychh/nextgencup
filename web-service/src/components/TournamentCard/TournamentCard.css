@@ -1,38 +1,132 @@
-/* src/components/TournamentCard/TournamentCard.css */
-
+/* Контейнер карточки горячих турниров */
 .tournament-card {
-    background-color: #1f1f1f;
-    border-radius: 8px;
-    padding: 16px;
-    min-width: 150px;
-    position: relative;
-    color: #fff;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: #121212;
+  border-radius: 10px;
+  margin: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  background-color: #444040;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+/* Иконка игры в верхнем левом углу */
+.card-icon-wrapper {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.status-container {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: row; 
+  align-items: flex-end;
+}
+
+/* Статус в правом верхнем углу */
+.status-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgb(74,68,227);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #fff;
+}
+.card-participants {
+  position: absolute;
+  top: 30px;      /* уменьшили отступ сверху, было 40px */
+  right: 35px;    /* увеличили отступ справа, было 12px */
+  font-size: 12px;
+  color: #ccc; 
+  padding: 4px 9%;
+}
+
+/* Основной контент карточки */
+.card-content {
+  position: absolute;
+  top: 70px;
+  left: 8px;
+  right: 8px;
+}
+
+.card-title {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.card-game,
+.card-mode,
+.card-prize {
+  font-size: 12px;
+  color: #ccc;
+  margin: 2px 0;
+}
+
+/* Нижняя часть с датой и стрелкой */
+.card-footer {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.card-date {
+  font-size: 12px;
+  margin-right: 100px;
+  color: #ccc;
+}
+
+.card-arrow {
+  width: 25px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Медиазапросы для мобильных устройств */
+@media (max-width: 480px) {
+  .tournament-card {
+    width: 150px;
+    height: 140px;
+    padding: 10px;
+    margin: 4px;
   }
-  
-  .tournament-info h3 {
-    margin: 0 0 8px;
-    font-size: 16px;
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 4px;
   }
-  
-  .tournament-info p {
-    margin: 4px 0;
-    font-size: 14px;
+  .card-content {
+    top: 60px;
+    padding: 0 4px;
   }
-  
-  /* Пример отображения статусов */
-  .status-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    padding: 4px 8px;
-    font-size: 12px;
-    border-radius: 4px;
-    background-color: #ffcc00;
-    color: #000;
+  .card-title {
+    font-size: 13px;
   }
-  
-  .status-badge.open {
-    background-color: #1ce1a3;
-    color: #000;
+  .card-game,
+  .card-mode,
+  .card-prize,
+  .card-participants {
+    font-size: 11px;
   }
-  
+  .card-date {
+    font-size: 11px;
+    margin-right: 78px;
+  }
+  .card-arrow {
+    width: 25px;
+  }
+}

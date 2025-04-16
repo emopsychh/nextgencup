@@ -1,45 +1,55 @@
-/* src/pages/Home.css */
 .home-container {
-    color: #ffffff;
-    background-color: #121212; /* темный фон */
-    min-height: calc(100vh - 50px); /* с учётом нижней навигации */
-    padding: 16px;
-  }
-  
-  .home-header {
-    text-align: left;
-    margin-bottom: 24px;
-  }
-  
-  .home-header h1 {
-    font-size: 32px;
-    margin: 0 0 8px;
-  }
-  
-  .home-header p {
-    font-size: 16px;
-    margin: 0 0 16px;
-  }
-  
-  .primary-button {
-    background-color: #ffcc00;
-    color: #000;
-    padding: 12px 20px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  /* Блоки турниров */
-  .hot-tournaments-section,
-  .my-tournaments-section {
-    margin-bottom: 24px;
-  }
-  
-  .tournaments-grid {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto; /* если хотим горизонтальную прокрутку или что-то подобное */
-  }
-  
+  padding: 16px;
+  background-color: rgb(27,13,36);
+  min-height: 100vh;
+  color: #fff;
+}
+
+.home-header { 
+  text-align: left; 
+  margin-bottom: 20px;
+}
+
+.home-header h1 {
+  margin-left:15px;
+  font-size: 50px;
+  margin: 0;
+}
+
+.home-header p {
+  margin-left:10px;
+  font-size: 23px;
+  margin: 0;
+}
+
+.primary-button {
+  display: block;
+  width: calc(100% - 10px);
+  margin: 20px 5px 15px 5px;
+  padding: 16px 0;
+  background-color:rgb(69,46,96);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.hot-tournaments-section,
+.my-tournaments-section {
+  margin-bottom: 20px;
+ 
+}
+
+.tournaments-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.hot-icon {
+  width: 24px;    /* или любой подходящий размер */
+  height: auto;
+  margin-left: 135px;  /* отступ между текстом и иконкой */
+  vertical-align: middle; /* чтобы иконка была на одной линии с текстом */
+}
