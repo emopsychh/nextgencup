@@ -4,12 +4,12 @@ import time
 from dotenv import load_dotenv
 
 # Загружаем переменные из .env
-load_dotenv()
+load_dotenv(dotenv_path=".env")
 
 CLIENT_ID = os.getenv("CHALLENGERMODE_CLIENT_ID")
 REFRESH_KEY = os.getenv("CHALLENGERMODE_REFRESH_KEY")
 BASE_URL = "https://publicapi.challengermode.com/graphql"
-AUTH_URL = "https://auth.challengermode.com/connect/token"
+AUTH_URL = "https://auth.challengermode.com/v1/auth/access_keys"
 
 # Кэш для хранения токена
 _token_cache = {
@@ -17,35 +17,31 @@ _token_cache = {
     "expires_at": 0
 }
 
-# Функция для получения access токена
+
 async def get_access_token():
-    # Проверка, есть ли еще действующий токен
     if _token_cache["access_token"] and _token_cache["expires_at"] > time.time():
         return _token_cache["access_token"]
 
-    # Если токен устарел или отсутствует, получаем новый
     async with aiohttp.ClientSession() as session:
         async with session.post(
             AUTH_URL,
-            headers={"Content-Type": "application/x-www-form-urlencoded"},
-            data={
-                "grant_type": "client_credentials",
-                "client_id": CLIENT_ID,
-                "client_secret": REFRESH_KEY
+            headers={"Content-Type": "application/json"},
+            json={
+                "refreshKey": REFRESH_KEY
             }
         ) as resp:
             if resp.status == 200:
                 data = await resp.json()
-                access_token = data["access_token"]
-                expires_in = data["expires_in"]
+                access_token = data["value"]
+                expires_at_str = data["expiresAt"]
+                expires_at_unix = time.mktime(time.strptime(expires_at_str.split(".")[0], "%Y-%m-%dT%H:%M:%S"))
 
-                # Кэшируем токен и его время истечения
                 _token_cache["access_token"] = access_token
-                _token_cache["expires_at"] = time.time() + expires_in - 10  # с запасом
-
+                _token_cache["expires_at"] = expires_at_unix - 10
                 return access_token
             else:
                 raise Exception(f"Ошибка получения токена: {resp.status} - {await resp.text()}")
+
 
 # Функция для создания турнира
 async def create_tournament(title: str, description: str, start_time: str):
