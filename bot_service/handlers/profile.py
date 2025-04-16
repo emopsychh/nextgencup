@@ -1,7 +1,7 @@
 from aiogram import Router, types, F
 from sqlalchemy.future import select
-from database.models import User
-from database.db import AsyncSessionLocal
+from db_container.models import User
+from db_container.db import AsyncSessionLocal
 from aiogram.utils.markdown import hbold
 
 router = Router()
