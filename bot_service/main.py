@@ -1,9 +1,6 @@
-import sys
-import os
 from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from db_container.db import Base, engine
+from db_container.db import engine, Base
 from handlers import routers, start, profile, tournaments, back
 
 
