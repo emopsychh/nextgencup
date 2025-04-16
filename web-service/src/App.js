@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 
 import Home from './pages/Home.js';
-import Profile from './pages/Profile';
-import Tournaments from './pages/Tournaments';
+import Profile from './pages/Profile.js';
+import Tournaments from './pages/Tournaments.js';
 import BottomNav from './components/BottomNav/BottomNav.js';
 
 
