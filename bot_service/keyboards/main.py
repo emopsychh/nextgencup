@@ -18,3 +18,14 @@ def submenu_keyboard() -> ReplyKeyboardMarkup:
         ],
         resize_keyboard=True
     )
+def settings_menu_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="🔔 Уведомления и напоминания")],
+            [KeyboardButton(text="🌐 Изменить язык на английский")],
+            [KeyboardButton(text="ℹ️ Часто задаваемые вопросы (FAQ)")],
+            [KeyboardButton(text="◀️ Назад")],
+        ],
+        resize_keyboard=True
+    )
+
