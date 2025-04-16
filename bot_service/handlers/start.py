@@ -1,8 +1,8 @@
 from aiogram import Router, types, F
 from aiogram.filters import CommandStart
 from sqlalchemy.future import select
-from database.models import User
-from database.db import AsyncSessionLocal
+from db_container.models import User
+from db_container.db import AsyncSessionLocal
 from keyboards.main import main_menu_keyboard 
 from keyboards.main import submenu_keyboard
 from aiogram.utils.markdown import hbold

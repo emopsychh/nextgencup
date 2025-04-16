@@ -2,8 +2,8 @@ from aiogram import Router, types, F
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from sqlalchemy import select
 from datetime import datetime
-from database.db import AsyncSessionLocal
-from database.models import Tournament
+from db_container.db import AsyncSessionLocal
+from db_container.models import Tournament
 from keyboards.tournaments import tournaments_menu_keyboard, admin_tournaments_keyboard
 from aiogram.fsm.context import FSMContext
 from states.tournament_states import TournamentCreation
