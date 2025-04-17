@@ -1,41 +1,27 @@
-version: '3.9'
-
 services:
   db:
-    image: postgres:13
-    container_name: db_container
+    image: postgres:15
+    restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "1231"
-      POSTGRES_DB: nextgencup
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
 
   bot:
-    build:
-      context: ./bot_service
-      dockerfile: Dockerfile 
-    container_name: bot_service
+    build: .
+    environment:
+      - PYTHONPATH=/app:$PYTHONPATH
+    restart: always
     depends_on:
       - db
-    environment:
-      DB_HOST: db
-      DB_USER: postgres
-      DB_PASSWORD: "1231"
-      DB_NAME: nextgencup
+    env_file:
+      - .env
     volumes:
-      - ./bot_service:/app
-    command: python main.py
+      - ./bot_service:/app/bot_service
 
-  web:
-    build:
-      context: ./web-service
-      dockerfile: Dockerfile
-    container_name: web-service
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./web-service:/app
-    command: npm start
+volumes:
+  pgdata:
