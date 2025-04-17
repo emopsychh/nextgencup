@@ -1,3 +1,5 @@
+version: '3.9'
+
 services:
   db:
     image: postgres:15
@@ -22,6 +24,12 @@ services:
       - .env
     volumes:
       - ./bot_service:/app/bot_service
+
+  web:
+    build: ./web_service
+    ports:
+      - "3000:80"  # Хост:Контейнер (Nginx)
+    restart: always
 
 volumes:
   pgdata:
