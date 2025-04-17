@@ -1,9 +1,8 @@
-version: '3.9'
+# version: '3.9'
 
 services:
-  db:
+  core-db:
     image: postgres:13
-    container_name: db_container
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "1231"
@@ -11,31 +10,49 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d nextgencup"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
 
-  bot:
+  bot-service:
     build:
       context: ./bot_service
-      dockerfile: Dockerfile 
-    container_name: bot_service
+      dockerfile: Dockerfile
+    container_name: bot-service
     depends_on:
-      - db
+      core-db:
+        condition: service_healthy
     environment:
-      DB_HOST: db
-      DB_USER: postgres
-      DB_PASSWORD: "1231"
-      DB_NAME: nextgencup
-    volumes:
-      - ./bot_service:/app
+      DATABASE_URL: postgresql+asyncpg://postgres:1231@db/nextgencup 
+      BOT_TOKEN: "<BOT_TOKEN>"
     command: python main.py
+    restart: unless-stopped
 
-  web:
+  web-service:
     build:
       context: ./web-service
       dockerfile: Dockerfile
     container_name: web-service
+    depends_on:
+      core-db:
+        condition: service_healthy
     ports:
       - "3000:3000"
     volumes:
+      # код для разработки (можно убрать, если не нужен hot‑reload)
       - ./web-service:/app
+      # зависимости остаются из образа, не затираются
+      - web-node-modules:/app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     command: npm start
+    restart: unless-stopped
+
+volumes:
+  pgdata:           # для Postgres
+  web-node-modules: # для node_modules в веб‑сервисе
+  # bot-code:       # если захотите хранить код бота как том, раскомментируйте

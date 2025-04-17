@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
-from bot_service.config import DATABASE_URL
+from config import DATABASE_URL
 
 from typing import AsyncGenerator
 
