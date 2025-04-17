@@ -1,0 +1,27 @@
+/* src/components/BottomNav/BottomNav.css */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #180c1f;
+  padding: 13px 0;
+}
+
+.nav-item {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* выравниваем по центру по горизонтали */
+}
+  
+  .nav-icon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 4px;  /* отступ между иконкой и текстом */
+  }
+  
+  .nav-item.active {
+    color: #ffcc00;
+  }
