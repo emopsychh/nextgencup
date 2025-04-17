@@ -1,0 +1,83 @@
+/* src/pages/Home.css */
+.home-container {
+    color: #ffffff;
+    background-color: #320c61; /* темный фон */
+    min-height: calc(100vh - 50px); /* с учётом нижней навигации */
+    padding: 16px;
+  }
+  
+  .home-header {
+    text-align: left;
+    margin-bottom: 24px;
+  }
+  
+  .home-header h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+  }
+  
+  .home-header p {
+    font-size: 16px;
+    margin: 0 0 16px;
+  }
+ 
+  /* Статус-метка (верхний правый угол) */
+.status-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #2EE59D; /* можно менять в зависимости от статуса */
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+  .primary-button {
+    background-color: #a162e4;
+    color: white;
+    padding: 34px 0;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+    width: calc(100% - 10px); 
+    min-height: 60px;
+  }
+  
+  /* Блоки турниров */
+  .hot-tournaments-section,
+  .my-tournaments-section {
+    margin-bottom: 24px;
+  }
+  .tournaments-banner {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  
+  .tournaments-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto; /* если хотим горизонтальную прокрутку или что-то подобное */
+  }
+  
+  .header-logo {
+    width: 50px; /* либо задайте нужную ширину */
+    height: auto;
+    margin-bottom: 10px; /* если нужно отступить от заголовка */
+  } 
+  @media (max-width: 480px) {
+  .home-header h1 {
+    font-size: 36px;
+  }
+  .home-header p {
+    font-size: 24px;
+  }
+  .primary-button {
+    padding: 5px 5px;
+    font-size: 24px;
+  }
+}

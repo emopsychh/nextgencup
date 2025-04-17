@@ -1,0 +1,135 @@
+/* Общий стиль карточки */
+.tournament-card {
+  position: relative;
+  width: 230px; /* измените по необходимости */
+  height: 230px;
+  background-color: #1f1f1f;
+  border-radius: 8px;
+  padding: 16px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.tournament-card:hover {
+  transform: scale(1.02);
+}
+
+/* Иконка (левый верхний угол) */
+.card-icon-wrapper {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10%;
+}
+
+/* Статус (правый верхний угол) */
+.status-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #28516f; /* пример: зеленый для «Открытый» */
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  color: #fff;
+}
+.card-arrow {
+  width: 19px;     /* задайте нужный размер */
+  height: 30px;
+  object-fit: contain;
+}
+/* Контент карточки */
+.card-content {
+  margin-top: 60px; /* отступ для иконки и статуса */
+
+  text-align: center;
+}
+
+.card-title {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.card-game,
+.card-mode,
+.card-prize,
+.card-participants {
+  font-size: 12px;
+  margin: 4px 0;
+  color: #ccc;
+}
+
+/* Стили модального окна */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  border-top: 1px solid #333;
+  padding-top: 8px;
+}
+
+.card-date {
+  font-size: 12px;
+  color: #ccc;
+}
+.card-arrow {
+  width: 35px;     /* задайте нужный размер */
+  height: 35px;
+  height: auto;
+  object-fit: contain;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  color: #000;
+}
+@media (max-width: 480px) {
+  .card-title {
+    font-size: 14px;
+  }
+  .card-game,
+  .card-mode,
+  .card-prize,
+  .card-participants {
+    font-size: 10px;
+  }
+  .status-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+  .card-arrow {
+    width: 16px;
+  }
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 0; 
+  }
+}
