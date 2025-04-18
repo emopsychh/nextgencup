@@ -2,6 +2,8 @@
 import React from 'react';
 import TournamentCard from '../components/TournamentCard/TournamentCard';
 import MyTournamentCard from '../components/MyTournamentCard/MyTournamentCard';
+import FireIcon from '../../src/asset/fire.png';
+
 import './Home.css';
 
 function Home() {
@@ -13,7 +15,6 @@ function Home() {
       gameName: 'Counter-Strike',
       mode: '5х5',
       prize: '10 000₽',
-      participants: 16,
       status: 'Открытый',
       date:"20 апреля"
     },
@@ -23,7 +24,6 @@ function Home() {
       gameName: 'Counter-Strike',
       mode: '1х1',
       prize: '5 000₽',
-      participants: 2,
       status: 'Закрытый',
       date:"20 апреля"
     },
@@ -71,13 +71,18 @@ function Home() {
       </header>
 
       <section className="hot-tournaments-section">
-        <h2>Горячие турниры</h2>
+        <div className="hot-title">
+          <h2>Горячие турниры</h2>
+          <img src={FireIcon} alt="Иконка огня" className="fire-icon" />
+        </div>
+  
         <div className="tournaments-grid">
           {hotTournaments.map(t => (
-            <TournamentCard key={t.id} tournament={t} />
+          <TournamentCard key={t.id} tournament={t} />
           ))}
         </div>
       </section>
+
 
       <section className="my-tournaments-section">
         <h2>Мои турниры</h2>

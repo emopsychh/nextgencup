@@ -5,7 +5,7 @@ import arrowImg from '../../asset/arrow2.png';
 function TournamentCard({ tournament }) {
   // Извлекаем нужные поля из объекта турнира
   // Поля можно назвать, как угодно: title, gameName, mode, prize, participants, status.
-  const { title, gameName, mode, prize, participants, status, date } = tournament;
+  const { gameName, mode, prize, status, date } = tournament;
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -20,18 +20,25 @@ function TournamentCard({ tournament }) {
   return (
     <>
       <div className="tournament-card" onClick={handleClick}> 
+        
+        <div className='head-line'>
         <div className="card-icon-wrapper">
           <img src={csIcon} alt="Иконка игры" className="card-icon" />
         </div> 
-        <div className="status-badge">
-          {status}
-        </div> 
+
+        <div className='right-for-icon'>
+          <div className="status-badge">
+            {status}
+          </div> 
+
+          <div className="mode-label">
+            {mode}
+          </div>
+        </div>
+        </div>
         <div className="card-content">
-          <h3 className="card-title">{title}</h3>
-          <p className="card-game">{gameName}</p>
-          <p className="card-mode">{mode}</p>
-          <p className="card-prize">Призовой фонд: {prize}</p>
-          <p className="card-participants">Участников: {participants}</p>
+          <h3 className="card-title">{gameName}</h3>
+          <h3 className="card-prize">{prize}</h3>
           <div className="card-footer">
             <span className="card-date">{date}</span>
             <img src={arrowImg} alt="" className="card-arrow" />
