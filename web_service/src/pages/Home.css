@@ -1,12 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@200;300;400;700&display=swap');
+
 /* src/pages/Home.css */
 .home-container {
+    font-family: 'Unbounded', sans-serif;
     color: #ffffff;
-    background-color: #320c61; /* темный фон */
+    background: linear-gradient(#1C0F25, #110817); /* темный фон */
     min-height: calc(100vh - 50px); /* с учётом нижней навигации */
-    padding: 16px;
+    padding: 25px;
+    
   }
   
   .home-header {
+    margin-top: 25px;
+    font-family: 'Unbounded', sans-serif;
     text-align: left;
     margin-bottom: 24px;
   }
@@ -18,22 +25,16 @@
   
   .home-header p {
     font-size: 16px;
+    color: #8B8B8B;
     margin: 0 0 16px;
   }
  
   /* Статус-метка (верхний правый угол) */
-.status-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: #2EE59D; /* можно менять в зависимости от статуса */
-  font-size: 10px;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
+
 
   .primary-button {
-    background-color: #a162e4;
+    font-family: 'Comfortaa', sans-serif;
+    background: linear-gradient(to right,#5A4079, #3A2455);
     color: white;
     padding: 34px 0;
     border-radius: 10px;
@@ -47,21 +48,45 @@
     width: calc(100% - 10px); 
     min-height: 60px;
   }
+
+  .hot-title {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* расстояние между текстом и иконкой */
+    margin-bottom: 12px;
+  }
+  
+  .hot-title h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 400;
+  }
+  .my-tournaments-section h2{
+    font-size: 24px;
+  }
+  .fire-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
   
   /* Блоки турниров */
   .hot-tournaments-section,
   .my-tournaments-section {
     margin-bottom: 24px;
+    
   }
   .tournaments-banner {
     text-align: center;
     margin-bottom: 16px;
+    
   }
   
   .tournaments-grid {
     display: flex;
     gap: 16px;
-    overflow-x: auto; /* если хотим горизонтальную прокрутку или что-то подобное */
+    flex-wrap: wrap; /* если хотим горизонтальную прокрутку или что-то подобное */
+    
   }
   
   .header-logo {
@@ -71,13 +96,42 @@
   } 
   @media (max-width: 480px) {
   .home-header h1 {
-    font-size: 36px;
+    font-size: 50px;
+    font-weight: 300;
   }
   .home-header p {
-    font-size: 24px;
+    font-size: 20px;
+    font-weight:400;
+
   }
   .primary-button {
     padding: 5px 5px;
     font-size: 24px;
+    font-weight: 100;
   }
+  .hot-tournaments-section h2{
+    font-weight: 400;
+  }
+  .my-tournaments-section h2{
+    font-weight: 400;
+  }
+  .hot-title h2 {
+    font-size: 22px;
+  }
+  .my-tournaments-section h2{
+    font-size: 22px;
+  }
+  .fire-icon {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .hot-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 👈 добавь это */
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  
 }

@@ -1,10 +1,10 @@
 /* Общий стиль карточки */
 .tournament-card {
   position: relative;
-  width: 230px; /* измените по необходимости */
-  height: 230px;
-  background-color: #1f1f1f;
-  border-radius: 8px;
+  width: 170px; /* измените по необходимости */
+  height: 160px;
+  background-color: #201328;
+  border-radius: 20px;
   padding: 16px;
   box-sizing: border-box;
   color: #fff;
@@ -12,37 +12,60 @@
   transition: transform 0.2s;
   overflow: hidden;
   margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);  /* Незначительная тень для выделения */
+
 }
 
 .tournament-card:hover {
   transform: scale(1.02);
 }
-
+.head-line{
+  display: flex;
+  align-items: center; /* выравнивание по вертикали */
+  gap: 12px; /* отступ между колонками */
+}
 /* Иконка (левый верхний угол) */
 .card-icon-wrapper {
-  position: absolute;
-  top: 8px;
-  left: 8px;
+  width: 50px;
+  height: 50px;
+  background-color: #1a0e2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-icon {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 10%;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.right-for-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 /* Статус (правый верхний угол) */
 .status-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: #28516f; /* пример: зеленый для «Открытый» */
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 10px;
-  color: #fff;
+  background-color: #5142CF;
+  color: white;
+  margin-left: 7px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 300;
 }
+
+
+.mode-label {
+  padding: 4px 35px;
+  
+  font-size: 11px;
+  color: #aaa;
+}
+
 .card-arrow {
   width: 19px;     /* задайте нужный размер */
   height: 30px;
@@ -50,20 +73,19 @@
 }
 /* Контент карточки */
 .card-content {
-  margin-top: 60px; /* отступ для иконки и статуса */
 
-  text-align: center;
+  text-align:start;
 }
 
-.card-title {
-  font-size: 16px;
+.card-title,
+.card-prize {
+  font-size: 15px;
   margin: 8px 0;
+  font-weight: 300;
+
 }
 
-.card-game,
-.card-mode,
-.card-prize,
-.card-participants {
+.card-mode{
   font-size: 12px;
   margin: 4px 0;
   color: #ccc;
@@ -86,14 +108,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 12px;
-  border-top: 1px solid #333;
-  padding-top: 8px;
 }
 
 .card-date {
   font-size: 12px;
-  color: #ccc;
+  color: #8B8B8B;
 }
 .card-arrow {
   width: 35px;     /* задайте нужный размер */
@@ -111,25 +130,34 @@
   color: #000;
 }
 @media (max-width: 480px) {
-  .card-title {
-    font-size: 14px;
+  .card-title,
+  .card-prize  {
+    font-size: 15px;
   }
-  .card-game,
-  .card-mode,
-  .card-prize,
-  .card-participants {
+  .card-mode{
     font-size: 10px;
   }
-  .status-badge {
-    font-size: 9px;
-    padding: 2px 6px;
-  }
+  
   .card-arrow {
     width: 16px;
   }
   .card-icon {
     width: 60px;
     height: 60px;
-    margin-right: 0; 
+  }
+  .right-for-icon {
+    left: 72px;
+    top: 12px;
+    gap: 5px;
+  }
+  .status-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+    line-height: 18px;
+  }
+
+  .mode-label {
+    font-size: 12px;
+    font-weight: 300;
   }
 }
