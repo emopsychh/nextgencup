@@ -84,9 +84,17 @@
   
   .tournaments-grid {
     display: flex;
+    flex-direction: row;
     gap: 16px;
-    flex-wrap: wrap; /* если хотим горизонтальную прокрутку или что-то подобное */
-    
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap; /* ❗ Отключает перенос вниз */
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .tournaments-grid::-webkit-scrollbar {
+    display: none;
   }
   
   .header-logo {

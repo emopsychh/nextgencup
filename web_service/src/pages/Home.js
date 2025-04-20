@@ -27,6 +27,15 @@ function Home() {
       status: 'Закрытый',
       date:"20 апреля"
     },
+    {
+      id: 2,
+      title: 'Counter-Strike',
+      gameName: 'Counter-Strike',
+      mode: '1х1',
+      prize: '5 000₽',
+      status: 'Закрытый',
+      date:"20 апреля"
+    },
   ];
 
   const myTournaments = [
