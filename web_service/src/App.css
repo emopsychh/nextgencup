@@ -1,20 +1,56 @@
-.App {
-  text-align: center;
-}
-  
-.App-header {
-  background-color: #282c34;
+.app-container {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding-bottom: 80px; /* отступ под навигацию */
+}
+
+/* Нижняя навигация */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-color: #1C0F25;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #333;
+  z-index: 100;
+}
+
+/* Одна иконка */
+.nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: 'Unbounded', sans-serif;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
- 
+/* Активная вкладка */
+.nav-item.active {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.nav-item.active .nav-icon {
+  opacity: 1;
+  transform: scale(1.2);
+}
