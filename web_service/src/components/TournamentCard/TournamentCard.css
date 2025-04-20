@@ -13,6 +13,9 @@
   overflow: hidden;
   margin: 0 auto;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);  /* Незначительная тень для выделения */
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  
 
 }
 
@@ -130,6 +133,8 @@
   color: #000;
 }
 @media (max-width: 480px) {
+  
+  
   .card-title,
   .card-prize  {
     font-size: 15px;
