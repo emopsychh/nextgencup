@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: linear-gradient(#1C0F25, #110817); /* темный фон */
+
 }
 
 .main-content {
@@ -54,3 +56,4 @@
   opacity: 1;
   transform: scale(1.2);
 }
+
