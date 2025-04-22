@@ -1,7 +1,6 @@
 /* src/pages/Profile.css */
 
 .profile-container { 
-  background-color: #1a0e22;
   min-height: calc(100vh - 56px);
   color: #fff;
   display: flex;
@@ -20,7 +19,7 @@
 
 .settings-icon {
   position: absolute;
-  top: 16px;
+  top: 160px;
   right: 16px;
   width: 24px;
   height: 24px;
@@ -47,13 +46,12 @@
 .profile-menu {
   display: flex;
   flex-direction: column;
-  max-width: 360px;  
-  width: 100%;
-  align-self: stretch;
+  align-items: center;       /* ✅ Центрирование по горизонтали */
   gap: 12px;
-  padding: 0 10px;
   margin-top: 24px;
+  padding: 0;
 }
+
 
 .profile-menu-item {
     position: relative;
@@ -64,7 +62,7 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  width: 100%;              /* Растягиваем меню на доступную ширину */
+  width: 70%;              /* Растягиваем меню на доступную ширину */
  
 }
 
@@ -119,5 +117,8 @@
   .menu-arrow {
     width: 22px;
     height: 22px;
+  }
+  .settings-icon {
+    top: 75px;
   }
 }

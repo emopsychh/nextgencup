@@ -5,14 +5,13 @@
 .home-container {
     font-family: 'Unbounded', sans-serif;
     color: #ffffff;
-    background: linear-gradient(#1C0F25, #110817); /* темный фон */
     min-height: calc(100vh - 50px); /* с учётом нижней навигации */
     padding: 25px;
     
   }
   
   .home-header {
-    margin-top: 25px;
+    margin-top: 60px;
     font-family: 'Unbounded', sans-serif;
     text-align: left;
     margin-bottom: 24px;
@@ -76,6 +75,11 @@
     margin-bottom: 24px;
     
   }
+
+  .my-tournaments-list{
+    gap:100px;
+  }
+
   .tournaments-banner {
     text-align: center;
     margin-bottom: 16px;
@@ -103,6 +107,7 @@
     margin-bottom: 10px; /* если нужно отступить от заголовка */
   } 
   @media (max-width: 480px) {
+    
   .home-header h1 {
     font-size: 50px;
     font-weight: 300;
@@ -140,6 +145,17 @@
     justify-content: space-between; /* 👈 добавь это */
     width: 100%;
     margin-bottom: 12px;
+  }
+  
+  html, body {
+    overflow: auto;
+    scrollbar-width: none;         /* Firefox */
+    -ms-overflow-style: none;      /* IE и Edge */
+  }
+  
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;                 /* Chrome, Safari, Opera */
   }
   
 }
