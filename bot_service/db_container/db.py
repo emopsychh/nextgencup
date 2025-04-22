@@ -1,9 +1,13 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy import create_engine
 from bot_service.config import DATABASE_URL
 
 from typing import AsyncGenerator
 
+sync_engine = create_engine(
+    DATABASE_URL.replace("postgresql+asyncpg", "postgresql+psycopg2")
+)
 engine = create_async_engine(DATABASE_URL, echo=False)
 AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
 Base = declarative_base()

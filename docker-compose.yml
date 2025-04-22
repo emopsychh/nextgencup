@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:15
+    image: postgres:16
     restart: always
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
@@ -9,7 +9,22 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"
+    networks:
+      - backend
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@yandex.ru
+      PGADMIN_DEFAULT_PASSWORD: admin@admin!
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - backend
 
   bot:
     build: .
@@ -22,12 +37,19 @@ services:
       - .env
     volumes:
       - ./bot_service:/app/bot_service
+    networks:
+      - backend
 
   web:
     build: ./web_service
     ports:
-      - "3000:80"  # Хост:Контейнер (Nginx)
+      - "3000:80"
     restart: always
+    networks:
+      - backend
 
 volumes:
   pgdata:
+
+networks:
+  backend:

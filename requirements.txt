@@ -3,5 +3,6 @@ aiohttp>=3.9.5
 SQLAlchemy>=2.0.29
 alembic>=1.13.1
 python-dotenv>=1.0.1
-asyncpg>=0.29.0
+asyncpg
 loguru>=0.7.2
+psycopg2-binary
