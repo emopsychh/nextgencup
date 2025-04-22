@@ -54,27 +54,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 /* Статус турнира */
 .my-tournament-status {
-  font-size: 13px;
-  font-weight: 500;
-  color: #2EE59D;
+  font-weight: 400;
+  padding: 4px 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 11px;
+  margin-bottom: 0;
 }
 .my-tournament-status.win {
-  color: #2EE59D;
-  background: none;
-  padding: 0;
-  border-radius: 0;
+  color: #ffffff;
+  background:linear-gradient(#89D55F,#36865E);
 }
-
-/* Поражение — красная */
 .my-tournament-status.lose {
-  color: #FF4D4D;
-  background: none;
-  padding: 0;
-  border-radius: 0;
+  color: #ffffff;
+  background:linear-gradient(#cf5555,#851717);
 }
 
 /* Дата турнира */
@@ -114,18 +112,20 @@
   }
   
   .my-tournament-status {
-    font-size: 12px;
     font-weight: 400;
     padding: 4px 12px;
     border-radius: 8px;
     text-align: center;
+    font-size: 11px;
+    margin-bottom: 0;
   }
   .my-tournament-status.win {
-    color: #2EE59D;
+    color: #ffffff;
+    background:linear-gradient(#89D55F,#36865E);
   }
   .my-tournament-status.lose {
-    color: #FF4D4D;
-    
+    color: #ffffff;
+    background:linear-gradient(#cf5555,#851717);
   }
   .my-tournament-status-text {
     font-size: 11px;
