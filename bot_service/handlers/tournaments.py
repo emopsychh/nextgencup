@@ -3,13 +3,13 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
-from keyboards.main import submenu_keyboard
-from keyboards.tournaments import tournaments_menu_keyboard, active_tournaments_inline_keyboard
+from bot_service.keyboards.main import submenu_keyboard
+from bot_service.keyboards.tournaments import tournaments_menu_keyboard, active_tournaments_inline_keyboard
 
-from db_container.db import get_session
-from db_container.models import Tournament
+from bot_service.db_container.db import get_session
+from bot_service.db_container.models import Tournament
 from sqlalchemy import select
-from services.challengermode_api import create_tournament   
+from bot_service.services.challengermode_api import create_tournament   
 
 router = Router()
 

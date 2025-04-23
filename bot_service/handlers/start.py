@@ -1,10 +1,10 @@
 from aiogram import Router, types, F
 from aiogram.filters import CommandStart
 from sqlalchemy.future import select
-from db_container.models import User
-from db_container.db import AsyncSessionLocal
-from keyboards.main import main_menu_keyboard 
-from keyboards.main import submenu_keyboard
+from bot_service.db_container.models import User
+from bot_service.db_container.db import AsyncSessionLocal
+from bot_service.keyboards.main import main_menu_keyboard 
+from bot_service.keyboards.main import submenu_keyboard
 from aiogram.utils.markdown import hbold
 from datetime import datetime
 

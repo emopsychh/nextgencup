@@ -2,9 +2,9 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from aiogram import Bot, Dispatcher
-from config import BOT_TOKEN
-from db_container.db import engine, Base
-from handlers import routers, start, profile, tournaments, settings
+from bot_service.config import BOT_TOKEN
+from bot_service.db_container.db import engine, Base
+from bot_service.handlers import routers, start, profile, tournaments, settings
 
 
 bot = Bot(token=BOT_TOKEN)

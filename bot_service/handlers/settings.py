@@ -1,6 +1,6 @@
 from aiogram import Router, types, F
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
-from keyboards.main import settings_menu_keyboard, main_menu_keyboard
+from bot_service.keyboards.main import settings_menu_keyboard, main_menu_keyboard
 
 router = Router()
 
