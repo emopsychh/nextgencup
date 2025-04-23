@@ -24,3 +24,12 @@ class Tournament(Base):
     chall_url = Column(String, nullable=True)  # ссылка на Challengermode
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "date": self.date.isoformat() if self.date else None,
+            "chall_url": self.chall_url,
+            "is_active": self.is_active,
+        }
