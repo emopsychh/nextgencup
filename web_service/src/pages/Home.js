@@ -94,7 +94,9 @@ function Home() {
 
 
       <section className="my-tournaments-section">
+      <div className="my-title">
         <h2>Мои турниры</h2>
+      </div>
         {/* Контейнер для списка турниров */}
         <div className="my-tournaments-list">
           {myTournaments.map(t => (

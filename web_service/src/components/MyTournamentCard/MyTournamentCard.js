@@ -3,7 +3,7 @@ import './MyTournamentCard.css';
 import csIcon from '../../asset/cs.jpg'; // Замените на путь к вашей иконке
 
 function MyTournamentCard({ tournament }) {
-  const { title, prize, status, date } = tournament;
+  const { title, mode , prize, status, date } = tournament;
 
   // Преобразуем статус
   const resultText = status === 'Открытый' ? 'Победа' : 'Поражение';
@@ -22,9 +22,13 @@ function MyTournamentCard({ tournament }) {
             {resultText}
           </span>
         </div>
-        <p className="my-tournament-prize">Призовой фонд: {prize}</p>
         
-        <div className="my-tournament-footer">
+        <div className="prize-and-mode2">
+          <p className="my-tournament-prize">Призовой фонд: {prize}</p>
+          <span className="mode-label3">{mode}</span>
+        </div>
+
+        <div className="my-tournament-footer1">
           <span className="my-tournament-date">{date}</span>
         </div>
       </div>
