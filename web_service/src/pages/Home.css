@@ -11,40 +11,44 @@
   }
   
   .home-header {
-    margin-top: 60px;
+    margin-top:75px;
     font-family: 'Unbounded', sans-serif;
     text-align: left;
     margin-bottom: 24px;
   }
   
   .home-header h1 {
-    font-size: 32px;
+    font-size: 56px;
+    font-weight: 300;
     margin: 0 0 8px;
   }
   
   .home-header p {
-    font-size: 16px;
+    font-size: 24px;
     color: #8B8B8B;
     margin: 0 0 16px;
+    font-weight: 200;
+
   }
  
-  /* Статус-метка (верхний правый угол) */
-
-
+  
+  
+  
   .primary-button {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 26px;
+    font-weight: 400;
     background: linear-gradient(to right,#5A4079, #3A2455);
     color: white;
     padding: 34px 0;
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    font-weight: bold;
     display: block;
     margin: 0 auto;
     text-align: center;
     margin-top: 20px;
-    width: calc(100% - 10px); 
+    width: 90%; 
     min-height: 60px;
   }
 
@@ -107,6 +111,25 @@
     height: auto;
     margin-bottom: 10px; /* если нужно отступить от заголовка */
   } 
+  /* Анимация появления страницы Home */
+  .home-content {
+    transform: translateY(10px); /* начальное положение */
+    opacity: 1; /* ВСЕГДА 1 */
+  }
+  
+  .home-content.fade-in1 {
+    animation: slideIn 0.4s ease forwards;
+  }
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateY(10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
   @media (max-width: 480px) {
   .home-header h1 {
     font-size: 50px;
@@ -119,7 +142,7 @@
   }
   .primary-button {
     padding: 5px 5px;
-    font-size: 24px;
+    font-size: 21px;
     font-weight: 100;
   }
   .hot-tournaments-section h2{
