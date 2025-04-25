@@ -1,5 +1,5 @@
 /* Контейнер карточки, задающий общую стилизацию */
-.my-tournament-card {
+.my-tournament-card1 {
   display: flex;
   align-items: center;
   background-color: #201328;  /* Темный фон */
@@ -10,7 +10,7 @@
 }
 
 /* Изображение карточки */
-.my-tournament-image {
+.my-tournament-image1 {
 
   /* display: block;      Изображение занимает всю ширину блока */
   width: 80px;         /* Растягивается на всю доступную ширину */
@@ -20,7 +20,7 @@
 }
 
 /* Текстовый блок карточки (находится под изображением) */
-.my-tournament-content {
+.my-tournament-content1 {
   display: flex;
   flex-direction: column;
   padding: 2px 10px;       /* Внутренние отступы для текста */
@@ -29,7 +29,7 @@
 }
 
 /* Заголовок (название турнира) */
-.my-tournament-title {
+.my-tournament-title1 {
   font-size: 16px;
   margin: 4px 0;
   color: #fff;
@@ -37,12 +37,12 @@
 }
 
 /* Призовой фонд */
-.my-tournament-prize {
+.my-tournament-prize1 {
   font-size: 14px;
   margin: 4px 0;
   color: #8B8B8B;          /* Светлый серый цвет */
 }
-.mode-labelll {
+.mode-label3 {
   font-size: 12px;
   color: #8B8B8B;
   display: block;           /* <== добавь */
@@ -51,7 +51,7 @@
   padding: 0;               /* на всякий случай */
 }
 
-.prize-and-mode {
+.prize-and-mode2 {
   display: flex;
   flex-direction: column;
   margin: 4px 0;
@@ -60,7 +60,7 @@
 
 
 /* Нижняя часть текстового блока: статус и дата */
-.my-tournament-footer {
+.my-tournament-footer1 {
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -69,7 +69,7 @@
   font-size: 12px;
   color: #8B8B8B;
 }
-.my-tournament-header {
+.my-tournament-header1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -77,7 +77,7 @@
 }
 
 /* Статус турнира */
-.my-tournament-status {
+.my-tournament-status1 {
   font-weight: 400;
   padding: 4px 12px;
   border-radius: 8px;
@@ -85,73 +85,79 @@
   font-size: 11px;
   margin-bottom: 0;
 }
-.my-tournament-status.win {
+.my-tournament-status1.win {
   color: #ffffff;
-  background:linear-gradient(#89D55F,#36865E);
+  background:linear-gradient(to right, #89D55F,#36865E);
 }
-.my-tournament-status.lose {
+.my-tournament-status1.lose {
   color: #ffffff;
-  background:linear-gradient(#cf5555,#851717);
+  background:linear-gradient(to right,#cf5555,#851717);
 }
 
 /* Дата турнира */
-.my-tournament-date {
+.my-tournament-date1 {
   font-size: 12px;
   font-weight: 400;
   
   color: #8B8B8B;
 }
+.mode-and-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
 @media (max-width: 480px) {
-  .my-tournament-card {
+  .my-tournament-card1 {
     flex-direction: row;
     align-items: center;
     padding: 3px;
     height: auto;
   }
 
-  .my-tournament-image {
+  .my-tournament-image1 {
     width: 45px;
     height: 45px;
     margin-left: 10px;
   }
 
-  .my-tournament-title {
+  .my-tournament-title1 {
     font-size: 12px;
     font-weight: 400;
   }
 
-  .my-tournament-prize {
+  .my-tournament-prize1 {
     font-size: 11px;
   }
 
-  @media (max-width: 480px) {
-    .mode-labelll {
-      font-size: 10px;
-      display: block;         /* <== добавь */
-      text-align: left;       /* <== добавь */
-      margin: 0;
-      padding: 0;
-    }
+  .mode-label3 {
+    font-size: 10px;
+    display: block;
+    text-align: left;
+    margin: 0;
+    padding: 0;
   }
-  
 
-  .prize-and-mode {
+  .mode-and-date {
+    font-size: 10px;
+  }
+
+  .prize-and-mode2 {
     margin: 3px 0;
   }
-  
 
-  .my-tournament-status {
+  .my-tournament-status1 {
     font-size: 11px;
     padding: 3px 10px;
   }
 
-  .my-tournament-date {
+  .my-tournament-date1 {
     font-size: 10px;
     font-weight: 400;
   }
 
-  .my-tournament-footer {
+  .my-tournament-footer1 {
     font-size: 10px;
     margin-top: 0px;
   }
