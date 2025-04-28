@@ -1,17 +1,12 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-def back_button():
+def cancel_back_keyboard():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="◀️ Назад")]
+            [
+                KeyboardButton(text="◀️ Назад"),
+                KeyboardButton(text="❌ Отмена")
+            ]
         ],
-        resize_keyboard=True
-    )
-
-def menu_with_back(buttons: list[str]):
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text=text)] for text in buttons
-        ] + [[KeyboardButton(text="◀️ Назад")]],
         resize_keyboard=True
     )
