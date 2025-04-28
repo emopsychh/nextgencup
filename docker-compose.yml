@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:16
@@ -11,7 +13,7 @@ services:
     ports:
       - "5433:5432"
     networks:
-      - backend
+      - nextgencup-net
 
   bot:
     build:
@@ -22,18 +24,13 @@ services:
     restart: always
     depends_on:
       - db
+      - mock-api
     volumes:
       - .:/app
     networks:
-      - backend
-
-  web:
-    build: ./web_service
-    ports:
-      - "3000:80"
-    restart: always
-    networks:
-      - backend
+      - nextgencup-net
+    extra_hosts:
+      - "auth.challengermode.com:172.29.0.2"  
 
   api:
     build:
@@ -42,13 +39,30 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - mock-api
     volumes:
       - .:/app
     networks:
-      - backend
+      - nextgencup-net
+
+  web:
+    build: ./web_service
+    ports:
+      - "3000:80"
+    restart: always
+    networks:
+      - nextgencup-net
+
+  mock-api:
+    build: ./mock_challengermode
+    ports:
+      - "8081:80"
+    networks:
+      - nextgencup-net
 
 volumes:
   pgdata:
 
 networks:
-  backend:
+  nextgencup-net:
+    driver: bridge

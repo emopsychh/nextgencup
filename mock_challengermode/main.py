@@ -1,21 +1,26 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from uuid import uuid4
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
-fake_tournaments = {}
 
-class TournamentCreate(BaseModel):
-    name: str
-    description: str
-    game: str
 
 @app.post("/tournaments")
-async def create_tournament(tournament: TournamentCreate):
-    tournament_id = str(uuid4())
-    fake_tournaments[tournament_id] = tournament.dict()
-    return {
-        "tournament_id": tournament_id,
-        "status": "created",
-        "details": fake_tournaments[tournament_id],
-    }
+async def create_tournament(request: Request):
+    print("✅ MOCK API ПОЛУЧИЛ ЗАПРОС НА СОЗДАНИЕ ТУРНИРА")
+    body = await request.json()
+    print("📦 Данные запроса:", body)
+
+    return JSONResponse(content={
+        "tournament_id": "mock-tournament-id"
+    })
+
+
+@app.post("/oauth/token")
+async def fake_oauth_token():
+    print("🔐 Перехватили запрос на авторизацию Challengermode!")
+
+    return JSONResponse(content={
+        "access_token": "mocked-access-token",
+        "token_type": "bearer",
+        "expires_in": 3600
+    })
