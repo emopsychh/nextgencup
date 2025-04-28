@@ -1,48 +1,53 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from datetime import datetime
 import calendar
+from zoneinfo import ZoneInfo
 
 def generate_calendar(year: int = None, month: int = None) -> InlineKeyboardMarkup:
-    now = datetime.now()
+    now = datetime.now(ZoneInfo("Europe/Moscow"))
     if not year:
         year = now.year
     if not month:
         month = now.month
 
-    today = now.date()
-    inline_keyboard = []
+    markup = InlineKeyboardMarkup(inline_keyboard=[])
 
-    # Шапка с месяцем и стрелками
-    inline_keyboard.append([
+    # Заголовок с кнопками назад / вперед
+    markup.inline_keyboard.append([
         InlineKeyboardButton(text="<<", callback_data=f"prev_month:{year}:{month}"),
         InlineKeyboardButton(text=f"{calendar.month_name[month]} {year}", callback_data="ignore"),
         InlineKeyboardButton(text=">>", callback_data=f"next_month:{year}:{month}")
     ])
 
-    # Дни недели
-    week_days = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
-    inline_keyboard.append([
-        InlineKeyboardButton(text=day, callback_data="ignore") for day in week_days
+    # Заголовок дней недели
+    markup.inline_keyboard.append([
+        InlineKeyboardButton(text="Пн", callback_data="ignore"),
+        InlineKeyboardButton(text="Вт", callback_data="ignore"),
+        InlineKeyboardButton(text="Ср", callback_data="ignore"),
+        InlineKeyboardButton(text="Чт", callback_data="ignore"),
+        InlineKeyboardButton(text="Пт", callback_data="ignore"),
+        InlineKeyboardButton(text="Сб", callback_data="ignore"),
+        InlineKeyboardButton(text="Вс", callback_data="ignore"),
     ])
 
-    # Дни месяца
+    # Календарные дни
     month_calendar = calendar.monthcalendar(year, month)
     for week in month_calendar:
-        row = []
+        buttons = []
         for day in week:
             if day == 0:
-                row.append(InlineKeyboardButton(text=" ", callback_data="ignore"))
+                buttons.append(InlineKeyboardButton(text=" ", callback_data="ignore"))
             else:
-                day_date = datetime(year, month, day).date()
-                if day_date < today:
-                    row.append(InlineKeyboardButton(text="🚫", callback_data="ignore"))
+                day_date = datetime(year, month, day, tzinfo=ZoneInfo("Europe/Moscow"))
+                if day_date.date() < now.date():
+                    buttons.append(InlineKeyboardButton(text="❌", callback_data="ignore"))
                 else:
-                    row.append(InlineKeyboardButton(text=str(day), callback_data=f"day:{year}:{month}:{day}"))
-        inline_keyboard.append(row)
+                    buttons.append(InlineKeyboardButton(text=str(day), callback_data=f"day:{year}:{month}:{day}"))
+        markup.inline_keyboard.append(buttons)
 
     # Кнопка отмены
-    inline_keyboard.append([
+    markup.inline_keyboard.append([
         InlineKeyboardButton(text="❌ Отмена", callback_data="cancel_calendar")
     ])
 
-    return InlineKeyboardMarkup(inline_keyboard=inline_keyboard)
+    return markup
