@@ -6,3 +6,4 @@ python-dotenv
 asyncpg
 loguru
 psycopg2-binary
+aiogram-calendar
