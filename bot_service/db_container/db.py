@@ -1,21 +1,30 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import declarative_base
-from bot_service.config import DATABASE_URL
 from typing import AsyncGenerator
+from bot_service.config import DATABASE_URL
 
-# Асинхронный движок
-engine = create_async_engine(DATABASE_URL, echo=False)
-
-# Асинхронная сессия
-AsyncSessionLocal = async_sessionmaker(
-    bind=engine,
-    expire_on_commit=False,
-)
-
-# Базовый класс для моделей
 Base = declarative_base()
 
-# Генератор асинхронных сессий
+# ✅ Создаём движок через функцию
+def get_engine():
+    return create_async_engine(DATABASE_URL, echo=False)
+
+# ✅ Создаём фабрику сессий через функцию
+def get_session_factory():
+    engine = get_engine()
+    return async_sessionmaker(
+        bind=engine,
+        expire_on_commit=False,
+    )
+
+# ✅ Генератор асинхронных сессий для FastAPI или работы в коде
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
-    async with AsyncSessionLocal() as session:
+    session_factory = get_session_factory()
+    async with session_factory() as session:
         yield session
+
+# ✅ Оставляем отдельную фабрику для бота (если нужно)
+AsyncSessionLocal = async_sessionmaker(
+    bind=get_engine(),
+    expire_on_commit=False,
+)
