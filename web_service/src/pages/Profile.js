@@ -6,17 +6,51 @@ import defaultAvatar from '../asset/Sex.jpg';
 export default function Profile() {
   const [activeTab, setActiveTab] = useState('stats');
   const [showContent, setShowContent] = useState('stats'); // добавлено
+  const [nickname, setNickname] = useState('Без имени');
+  const [avatar, setAvatar] = useState(defaultAvatar);
+
+  useEffect(() => {
+    // 1) получаем и сохраняем tg_id (если он пришёл в URL)
+    const params = new URLSearchParams(window.location.search);
+    const tgId = params.get('tg_id');
+
+    if (tgId) { 
+      localStorage.setItem('tg_id', tgId);
+    }
+  
+    // 2) сразу же запрашиваем профиль
+    const id = tgId || localStorage.getItem('tg_id');
+    if (!id) return;
+    console.log('Запрашиваю профиль for', tgId);
+    fetch('/profile', {
+      headers: { 'X-Telegram-ID': tgId }
+    })
+      .then(res => {
+        console.log('Ответ сервера:', res.status);
+        if (!res.ok) throw new Error(`Status ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        console.log('Данные профиля:', data);
+        setAvatar(data.photoUrl || defaultAvatar);
+        setNickname(data.username || 'Без имени');
+      })
+      .catch(err => console.error('Ошибка при запросе профиля:', err));
+  }, []);
+  
 
   useEffect(() => {
     const timer = setTimeout(() => setShowContent(activeTab), 10); // небольшая задержка
     return () => clearTimeout(timer);
+
+
   }, [activeTab]);
 
   return (
     <div className="profile-container">
       <header className="profile-header">
-        <img src={defaultAvatar} alt="Аватар" className="avatar" />
-        <h2 className="nickname">nickname</h2>
+        <img src={avatar} alt="Аватар" className="avatar" />
+        <h2 className="nickname">{nickname}</h2>
       </header>
 
       {/* Таб-переключатель */}
@@ -62,3 +96,4 @@ export default function Profile() {
     </div>
   );
 }
+

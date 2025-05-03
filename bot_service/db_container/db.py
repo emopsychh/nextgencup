@@ -28,3 +28,6 @@ AsyncSessionLocal = async_sessionmaker(
     bind=get_engine(),
     expire_on_commit=False,
 )
+engine = get_engine()
+
+async_session= AsyncSessionLocal
