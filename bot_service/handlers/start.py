@@ -1,12 +1,12 @@
+# bot_service/handlers/start.py
+
 from aiogram import Router, types, F
 from aiogram.filters import CommandStart
 from sqlalchemy.future import select
-from bot_service.db_container.models import User
+
 from bot_service.db_container.db import AsyncSessionLocal
-from bot_service.keyboards.main import main_menu_keyboard 
-from bot_service.keyboards.main import submenu_keyboard
-from aiogram.utils.markdown import hbold
-from datetime import datetime
+from bot_service.db_container.models import User
+from bot_service.keyboards.main import main_menu_keyboard, submenu_keyboard
 
 router = Router()
 
@@ -18,9 +18,16 @@ async def register_user(message: types.Message):
         user = result.scalar_one_or_none()
 
         if not user:
+            # используем message.bot вместо импорта bot из main!
+            photos = await message.bot.get_user_profile_photos(message.from_user.id)    
+            photo_file_id = None
+            if photos.total_count > 0 and photos.photos:
+                photo_file_id = photos.photos[0][0].file_id
+
             user = User(
                 telegram_id=message.from_user.id,
-                username=message.from_user.username
+                username=message.from_user.username,
+                photo_url=photo_file_id,
             )
             session.add(user)
             await session.commit()
@@ -38,6 +45,7 @@ async def register_user(message: types.Message):
                 text="👋 Ты уже зарегистрирован",
                 reply_markup=main_menu_keyboard()
             )
+
 #О проекте
 @router.message(F.text == "ℹ️ О проекте")
 async def about_project(message: types.Message):
