@@ -1,12 +1,12 @@
 // src/pages/Profile.js
 import React, { useState, useEffect } from 'react'; // добавлен useEffect
 import './Profile.css';
-import defaultAvatar from '../asset/Sex.jpg';
+import defaultAvatar from '../asset/nextgen.jpeg';
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState('stats');
   const [showContent, setShowContent] = useState('stats'); // добавлено
-  const [nickname, setNickname] = useState('Без имени');
+  const [nickname, setNickname] = useState('Nextgen');
   const [avatar, setAvatar] = useState(defaultAvatar);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function Profile() {
       .then(data => {
         console.log('Данные профиля:', data);
         setAvatar(data.photoUrl || defaultAvatar);
-        setNickname(data.username || 'Без имени');
+        setNickname(data.username || 'Nextgen');
       })
       .catch(err => console.error('Ошибка при запросе профиля:', err));
   }, []);
