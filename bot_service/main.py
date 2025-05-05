@@ -1,21 +1,26 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# bot_service/main.py
+
+import pathlib, sys
 from aiogram import Bot, Dispatcher
+
+# разрешаем импорт из корня репозитория
+ROOT = pathlib.Path(__file__).parent.parent.resolve()
+sys.path.insert(0, str(ROOT))
+
 from bot_service.config import BOT_TOKEN
-from bot_service.db_container.db import Base
-from bot_service.db_container.db import get_session
-from bot_service.handlers import routers, start, profile, tournaments, settings
-
-
+from bot_service.handlers import routers
+    
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
+
+# подключаем роутеры
 for router in routers:
     dp.include_router(router)
 
-
 async def main():
+    # убираем вебхук, если был
     await bot.delete_webhook(drop_pending_updates=True)
+    # запускаем polling
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
