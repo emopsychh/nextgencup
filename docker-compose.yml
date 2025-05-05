@@ -5,9 +5,9 @@ services:
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_DB: nextgencup
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1231
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
@@ -22,14 +22,14 @@ services:
 
   api:
     build:
-      context: .                                # КОРЕНЬ проекта!
-      dockerfile: web_api_service/Dockerfile   # путь к Dockerfile внутри проекта
+      context: .
+      dockerfile: web_api_service/Dockerfile
     ports:
       - "8001:8000"
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgresql+asyncpg://postgres:1231@db:5432/nextgencup
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       - BOT_TOKEN=${BOT_TOKEN}
     depends_on:
       - db
@@ -40,7 +40,7 @@ services:
   bot:
     build:
       context: .
-      dockerfile: Dockerfile 
+      dockerfile: Dockerfile
     env_file:
       - .env
     depends_on:
@@ -57,7 +57,6 @@ services:
       - "3000:80"
     networks:
       - nextgencup-net
-    
 
 volumes:
   pgdata:
