@@ -1,13 +1,14 @@
 #!/bin/sh
 
-echo "🟡 Waiting for PostgreSQL..."
-
+# Ожидание базы данных
+echo "⏳ Waiting for db..."
 while ! nc -z db 5432; do
-  sleep 1
+  sleep 0.1
 done
+echo "✅ DB is up!"
 
-echo "🟢 PostgreSQL is up – applying migrations..."
-alembic upgrade head
+# Применяем миграции
+alembic -c bot_service/alembic.ini upgrade head
 
-echo "🚀 Starting bot..."
-python bot_service/main.py
+# Запуск Python-приложения
+exec python bot_service/main.py
